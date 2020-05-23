@@ -30,6 +30,18 @@ Integration between TVB and NEST, for multiscale (co)simulations .
 
 Source code available here: <https://github.com/the-virtual-brain/tvb-multiscale>
 
+### TVB Data
+
+Both tvb-library and tvb-nest might need at some point some TVB compatible data.
+We have published our latest dataset here: https://zenodo.org/record/3688773#.XskDMp4zZYg.
+Download, unzip and execute:
+
+    python setup.py install
+
+We also have an older (and much smaller dataset) under Pypi, but remember this is a 
+subset of what can be found on Zenodo link above:
+
+    pip install tvb-data
 
 # Relevant TVB Resources
 
