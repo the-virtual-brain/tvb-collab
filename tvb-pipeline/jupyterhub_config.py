@@ -38,3 +38,29 @@ c.OAuthenticator.client_secret= os.environ['KEYCLOAK_CLIENT_SECRET']
 
 if 'APPLICATION_NAME' in os.environ:
     c.KubeSpawner.environment = { 'APPLICATION_NAME': os.environ["APPLICATION_NAME"] }
+
+
+# persistent storage for the notebooks
+c.KubeSpawner.user_storage_pvc_ensure = True
+
+c.KubeSpawner.pvc_name_template = 'pvc-{username}'
+c.KubeSpawner.user_storage_capacity = '1Gi'
+c.KubeSpawner.storage_class = 'managed-nfs-storage'
+
+c.KubeSpawner.volumes = [
+    {
+        'name': 'data',
+        'persistentVolumeClaim': {
+            'claimName': c.KubeSpawner.pvc_name_template
+        }
+    }
+]
+
+c.KubeSpawner.volume_mounts = [
+    {
+        'name': 'data',
+        'mountPath': '/home/jovyan/pipeline/persisted-data'
+    }
+]
+
+c.KubeSpawner.image_pull_policy = 'Always'
